@@ -1,0 +1,17 @@
+*{
+    margin: 0px;
+    background-color: black;
+    color: white;
+}
+
+div{
+    border: 3px solid red;
+}
+
+.myClass{
+    margin: 10px;
+}
+
+#myId{
+    padding: 10px;
+}
