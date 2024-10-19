@@ -1,0 +1,19 @@
+.box{
+    height: 700px;
+    border: 2px solid green;
+}
+
+.child{
+    width: 100px;
+    height: 100px;
+    border: 2px solid orange;
+    margin-top: 10px;
+    margin-left: 10px;
+    padding-left: 10px;
+    padding-top: 10px;
+    
+}
+.second{
+    height: 900px;
+    border: 2px solid red;
+}
