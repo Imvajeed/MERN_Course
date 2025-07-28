@@ -1,0 +1,24 @@
+.nav{
+    border: 2px solid black;
+}
+
+.navItems{
+    display: flex;
+}
+
+.navItem{
+    margin-left: 15px;
+    list-style: none;
+    background-color: aquamarine;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.navItem:hover{
+    cursor: pointer;
+}
+
+.navItem>a{
+    text-decoration: none;
+    color: black;
+}

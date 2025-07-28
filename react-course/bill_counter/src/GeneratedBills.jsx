@@ -1,6 +1,9 @@
+import { useContext } from 'react';
 import './App.css';
+import { BillingContext } from './App';
 
-function GeneratedBills({productList,resetBills,customerName,customerPhone}){
+function GeneratedBills(){
+  const {productList,resetBills,customerName,customerPhone} = useContext(BillingContext);
     return(
         <>
             <div className="generatedBillBox">

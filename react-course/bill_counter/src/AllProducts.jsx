@@ -1,6 +1,9 @@
+import { useContext } from 'react';
 import './App.css';
+import { BillingContext } from './App';
 
-function AllProducts({productList,handleGeneretBills}){
+function AllProducts(){
+  const {productList,handleGeneretBills} = useContext(BillingContext)
     return(
         <>
             <div className="allProducts">

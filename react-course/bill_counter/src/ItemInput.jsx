@@ -1,6 +1,10 @@
+import { useContext } from 'react';
 import './App.css'
+import { BillingContext } from './App';
 
-function ItemInput({productName,productPrice,productQTY,setProductName,setProductQTY,setProductPrice,handleAddButton}){
+function ItemInput(){
+    const {productName,productPrice,productQTY,setProductName,setProductQTY,setProductPrice,handleAddButton} = useContext(BillingContext);
+
     return(
         <>
         <div className="itemInput">
