@@ -1,18 +1,19 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import './home.css'
-import { TaskContext } from '../context/TaskContexts'
+import { useDispatch, useStore } from 'react-redux'
+import { addTask,removeTask,completeTask } from '../store/TaskSlice';
+import taskStore from '../store/TaskStore';
 function Home() {
-    const { inProgressTasks, setInProgressTasks,completedTask, setCompletedTasks } = useContext(TaskContext);
+    const dispatch = useDispatch();
+    const taskStoreState = useStore(taskStore);
+    const [inProgressTasks,setInProgressTasks] =useState(taskStoreState.getState().task.values)
+    
+    taskStoreState.subscribe(()=>{
+        setInProgressTasks(taskStoreState.getState().task.values)
+        console.log(taskStoreState.getState().task.values);
+    })
 
-
-    const updateStatus =(indexToRemove)=>{
-        setCompletedTasks([...completedTask,inProgressTasks[indexToRemove]]);
-        setInProgressTasks((prevElements)=>prevElements.filter((_,index)=>index!==indexToRemove))
-        console.log(inProgressTasks);
-    }
-    const deleteTask = (indexToRemove)=>{
-        setInProgressTasks((prevElements)=>prevElements.filter((_,index)=>index!==indexToRemove))
-    }
+    
     return (
         <>
             <div className="allTasks">
@@ -27,12 +28,12 @@ function Home() {
 
                     {
                         inProgressTasks.map((element, index) => (
-                            <tr>
-                                <td>{index+1}</td>
-                                <td>{element.task}</td>
+                            !element.completed&&<tr>
+                                <td>{element.id}</td>
+                                <td>{element.taskName}</td>
                                 <td>{element.description}</td>
-                                <td><input type="checkbox" onChange={()=>updateStatus(index)} /></td>
-                                <td><button className='deleteBtn' onClick={()=>deleteTask(index)}>Delete</button></td>
+                                <td><input type="checkbox" onChange={()=>dispatch(completeTask(element.id))} /></td>
+                                <td><button className='deleteBtn' onClick={()=>dispatch(removeTask(element.id))}>Delete</button></td>
                             </tr>
                         ))
                     }

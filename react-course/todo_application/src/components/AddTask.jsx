@@ -1,18 +1,22 @@
 import React, { useContext, useState } from 'react'
 import './addTask.css'
-import { TaskContext } from '../context/TaskContexts';
+import { useDispatch,useStore } from 'react-redux';
+import { addTask } from '../store/TaskSlice';
+import taskStore from '../store/TaskStore';
 
 function AddTask() {
     const [currentTask,setCurrentTask] = useState('');
     const [currentDescription,setCurrentDescription] = useState('');
-    const {inProgressTasks,setInProgressTasks} = useContext(TaskContext)
+    const dispatch = useDispatch();
+    const store = useStore(taskStore);
+
+    
 
     const handleSubmit = (e)=>{
         e.preventDefault();
 
         if(currentTask && currentDescription){
-            setInProgressTasks([...inProgressTasks,{task:currentTask,description:currentDescription}]
-            );
+            dispatch(addTask({name:currentTask,desc:currentDescription}))
             setCurrentTask('');
             setCurrentDescription('');
             alert('task addded');

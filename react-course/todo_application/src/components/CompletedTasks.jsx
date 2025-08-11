@@ -1,14 +1,22 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import './completed.css'
-import { TaskContext } from '../context/TaskContexts'
+import { useDispatch, useStore } from 'react-redux';
+import taskStore from '../store/TaskStore';
+import { removeTask } from '../store/TaskSlice';
+
 function CompletedTasks() {
-  const {completedTask, setCompletedTasks} = useContext(TaskContext);
+  const dispatch = useDispatch();
+  const store = useStore(taskStore);
+  const [completedTask,setCompletedTask] = useState(store.getState().task.values);
+
+  store.subscribe(()=>{
+    setCompletedTask(store.getState().task.values);
+  })
+
 
 
   const deleteTask = (indexToDelete) =>{
-    setCompletedTasks((prev)=>
-      prev.filter((_,index) =>index!== indexToDelete)
-    )
+    dispatch(removeTask(indexToDelete));
   }
   return (
     <>
@@ -23,13 +31,13 @@ function CompletedTasks() {
             </tr>
             {
               completedTask.map((ele,index)=>(
-                <tr>
-                <td>{index+1}</td>
-                <td>{ele.task}</td>
+                ele.completed&&<tr>
+                <td>{ele.id}</td>
+                <td>{ele.taskName}</td>
                 <td>{ele.description}</td>
                 <td>Completed</td>
-                <td><button className='deleteBtn' onClick={()=>deleteTask(index)}>Delete</button></td>
-            </tr>
+                <td><button className='deleteBtn' onClick={()=>deleteTask(ele.id)}>Delete</button></td>
+              </tr>
               ))
             }
         </table>
