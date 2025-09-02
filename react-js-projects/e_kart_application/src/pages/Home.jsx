@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import HomeCards from './HomeCards'
+import HomeCards from '../components/HomeCards'
 import { useDispatch } from 'react-redux'
 import store from '../store/EkartStore'
 import { GetAllProducts } from '../store/ProductsSlice'

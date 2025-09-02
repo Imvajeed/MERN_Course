@@ -2,9 +2,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { data } from "react-router-dom";
 
+const  API_URL = import.meta.env.VITE_API_URL;
+
 export const UserLogin = createAsyncThunk('/auth/login',async (userData, thunk)=>{
     try{
-        const responce = await axios.post('https://dummyjson.com/auth/login',{username:userData.username,password:userData.password}).catch(erorr=>thunk.rejectWithValue(erorr));
+        const responce = await axios.post(`${API_URL}/auth/login`,{username:userData.username,password:userData.password}).catch(erorr=>thunk.rejectWithValue(erorr));
         
         return await responce.data;
     }catch(e){

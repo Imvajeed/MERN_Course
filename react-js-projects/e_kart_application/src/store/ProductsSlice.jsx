@@ -1,9 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+const  API_URL = import.meta.env.VITE_API_URL;
+
 
 export const GetAllProducts = createAsyncThunk('/getAllProducts',async (_,thunk)=>{
     try{
-        const responce = await axios.get('https://dummyjson.com/products').catch(error=>thunk.rejectWithValue(error));
+        const responce = await axios.get(`${API_URL}/products`).catch(error=>thunk.rejectWithValue(error));
 
         return await responce.data;
     }catch(e){
