@@ -1,5 +1,5 @@
 {
-  "name": "03-handling_url",
+  "name": "05-request_methods",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
@@ -12,8 +12,6 @@
   "description": "",
   "dependencies": {
     "express": "^5.1.0",
-    "http": "^0.0.1-security",
-    "nodemon": "^3.1.10",
-    "url": "^0.11.4"
+    "nodemon": "^3.1.10"
   }
 }
